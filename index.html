@@ -24,7 +24,7 @@
                 <img src="Assets/Interface/logos/gamelogo.svg" alt="Kenzo's Sushi Battlegrounds"
                     class="game-logo-loader">
             </div>
-            <div class="loader-text">Loading...</div>
+            <div class="loader-text">CARGANDO...</div>
             <div class="loader-progress">
                 <div class="loader-progress-bar" id="progress-bar"></div>
             </div>
@@ -47,15 +47,15 @@
             <img src="Assets/Interface/logos/gamelogo.svg" alt="Kenzo's Sushi Battlegrounds" class="menu-logo">
             <div class="menu-buttons">
                 <button class="menu-btn primary" id="btn-start">
-                    <span class="btn-text">START GAME</span>
+                    <span class="btn-text">JUGAR</span>
                     <span class="btn-shine"></span>
                 </button>
                 <button class="menu-btn secondary" id="btn-options">
-                    <span class="btn-text">OPTIONS</span>
+                    <span class="btn-text">OPCIONES</span>
                     <span class="btn-shine"></span>
                 </button>
                 <button class="menu-btn secondary" id="btn-credits">
-                    <span class="btn-text">CREDITS</span>
+                    <span class="btn-text">CREDITOS</span>
                     <span class="btn-shine"></span>
                 </button>
             </div>
@@ -66,20 +66,20 @@
     <div id="character-select" class="screen">
         <div class="select-backdrop"></div>
         <div class="select-container">
-            <h1 class="select-title">CHOOSE YOUR FIGHTER</h1>
+            <h1 class="select-title">ESCOGE TU PERSONAJE</h1>
             <div class="character-grid" id="character-grid">
                 <!-- Characters will be injected by JS -->
             </div>
             <div class="character-preview">
                 <div class="preview-info">
-                    <h2 class="preview-name" id="preview-name">Select a Fighter</h2>
-                    <p class="preview-desc" id="preview-desc">Click on a character to select</p>
+                    <h2 class="preview-name" id="preview-name">ESCOGE TU PERSONAJE</h2>
+                    <p class="preview-desc" id="preview-desc">Clickea un luchador para pelear</p>
                 </div>
             </div>
             <div class="vs-display">
                 <div class="vs-player">
                     <div class="vs-portrait" id="player-portrait"></div>
-                    <span class="vs-label">YOU</span>
+                    <span class="vs-label">TU</span>
                 </div>
                 <div class="vs-text">VS</div>
                 <div class="vs-opponent">
@@ -88,7 +88,7 @@
                 </div>
             </div>
             <button class="menu-btn primary fight-btn" id="btn-fight" disabled>
-                <span class="btn-text">FIGHT!</span>
+                <span class="btn-text">PELEA!</span>
                 <span class="btn-shine"></span>
             </button>
         </div>
@@ -103,7 +103,7 @@
             <div class="hud-player">
                 <div class="hud-avatar" id="hud-player-avatar"></div>
                 <div class="hud-info">
-                    <span class="hud-name" id="hud-player-name">Player</span>
+                    <span class="hud-name" id="hud-player-name">JUGADOR</span>
                     <div class="hud-score">
                         <span class="score-value" id="player-score">0</span>
                     </div>
@@ -111,10 +111,10 @@
             </div>
             <div class="hud-center">
                 <div class="round-display">
-                    <span class="round-label">ROUND</span>
+                    <span class="round-label">RONDA</span>
                     <span class="round-number" id="round-number">1</span>
                 </div>
-                <div class="phase-display" id="phase-display">DRAFT PHASE</div>
+                <div class="phase-display" id="phase-display">FASE DE SELECCIÓN</div>
             </div>
             <div class="hud-opponent">
                 <div class="hud-info">
@@ -129,8 +129,8 @@
 
         <!-- Draft Phase UI -->
         <div class="draft-ui" id="draft-ui">
-            <h2 class="draft-title">Choose Your Card</h2>
-            <p class="draft-subtitle">Pick <span id="cards-remaining">10</span> more cards</p>
+            <h2 class="draft-title">Escoge tus cartas</h2>
+            <p class="draft-subtitle">Escoge <span id="cards-remaining">10</span> cartas mas</p>
             <div class="draft-choices" id="draft-choices">
                 <!-- Cards injected by JS -->
             </div>
@@ -145,24 +145,24 @@
         <div class="battle-ui hidden" id="battle-ui">
             <div class="battle-arena">
                 <div class="battle-slot player-slot" id="player-battle-slot">
-                    <div class="slot-label">Your Cards</div>
+                    <div class="slot-label">Tus cartas</div>
                     <div class="slot-cards" id="player-slot-cards"></div>
                 </div>
                 <div class="battle-vs">VS</div>
                 <div class="battle-slot opponent-slot" id="opponent-battle-slot">
-                    <div class="slot-label">Kenzo's Cards</div>
+                    <div class="slot-label">Cartas de Kenzo</div>
                     <div class="slot-cards" id="opponent-slot-cards"></div>
                 </div>
             </div>
             <button class="menu-btn primary" id="btn-battle" disabled>
-                <span class="btn-text">BATTLE!</span>
+                <span class="btn-text">BATALLA!</span>
                 <span class="btn-shine"></span>
             </button>
         </div>
 
         <!-- Round Result -->
         <div class="round-result hidden" id="round-result">
-            <div class="result-text" id="result-text">PLAYER WINS!</div>
+            <div class="result-text" id="result-text">VICTORIA DEL JUGADOR</div>
             <div class="result-detail" id="result-detail"></div>
         </div>
 
@@ -183,15 +183,15 @@
     <!-- Victory/Defeat Screen -->
     <div id="result-screen" class="screen">
         <div class="result-container">
-            <h1 class="result-title" id="final-result-title">VICTORY!</h1>
+            <h1 class="result-title" id="final-result-title">VICTORIA</h1>
             <p class="result-score" id="final-score">5 - 3</p>
             <div class="result-buttons">
                 <button class="menu-btn primary" id="btn-rematch">
-                    <span class="btn-text">REMATCH</span>
+                    <span class="btn-text">REVANCHA</span>
                     <span class="btn-shine"></span>
                 </button>
                 <button class="menu-btn secondary" id="btn-menu">
-                    <span class="btn-text">MAIN MENU</span>
+                    <span class="btn-text">MENU PRINCIPAL</span>
                     <span class="btn-shine"></span>
                 </button>
             </div>
@@ -201,21 +201,21 @@
     <!-- Options Modal -->
     <div id="options-modal" class="modal hidden">
         <div class="modal-content">
-            <h2>OPTIONS</h2>
+            <h2>OPCIONES</h2>
             <div class="option-row">
-                <label>Music Volume</label>
+                <label>Música</label>
                 <input type="range" id="music-volume" min="0" max="100" value="70">
             </div>
             <div class="option-row">
-                <label>SFX Volume</label>
+                <label>Efectos</label>
                 <input type="range" id="sfx-volume" min="0" max="100" value="80">
             </div>
             <div class="option-row">
-                <label>Voice Volume</label>
+                <label>Voces</label>
                 <input type="range" id="voice-volume" min="0" max="100" value="90">
             </div>
             <button class="menu-btn secondary" id="btn-close-options">
-                <span class="btn-text">CLOSE</span>
+                <span class="btn-text">CERRAR</span>
             </button>
         </div>
     </div>
@@ -223,15 +223,19 @@
     <!-- Credits Modal -->
     <div id="credits-modal" class="modal hidden">
         <div class="modal-content">
-            <h2>CREDITS</h2>
+            <h2>CREDITOS</h2>
             <div class="credits-text">
                 <p><strong>Kenzo's Sushi Battlegrounds</strong></p>
-                <p>A card battle game set in the world's finest sushi restaurant</p>
+                <p>Una producción de Eduardo Núñez</p>
                 <br>
-                <p>Created with ❤️ and Babylon.js</p>
+                <p>Creado por Dé Noir Games</p>
+                <br>
+                <p>Modular Sushi Restaurant Kit by Quaternius via Poly Pizza</p>
+                <br>
+                <p>Sounds and UI Kit by Kenney via Kenney.nl</p>
             </div>
             <button class="menu-btn secondary" id="btn-close-credits">
-                <span class="btn-text">CLOSE</span>
+                <span class="btn-text">CERRAR</span>
             </button>
         </div>
     </div>
@@ -241,5 +245,6 @@
     <script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
     <script type="module" src="src/main.js"></script>
 </body>
+
 
 </html>
