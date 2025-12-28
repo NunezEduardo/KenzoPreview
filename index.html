@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Kenzo's Sushi Battlegrounds - Un épico juego de cartas de batalla con temática de sushi">
+    <title>Kenzo's Sushi Battlegrounds</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Galindo&family=Noto+Sans+JP:wght@400;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="screen active">
+        <div class="loader-container">
+            <div class="loader-ring"></div>
+            <div class="loader-logo">
+                <img src="Assets/Interface/logos/gamelogo.svg" alt="Kenzo's Sushi Battlegrounds"
+                    class="game-logo-loader">
+            </div>
+            <div class="loader-text">Loading...</div>
+            <div class="loader-progress">
+                <div class="loader-progress-bar" id="progress-bar"></div>
+            </div>
+            <div class="loader-percentage" id="progress-text">0%</div>
+        </div>
+    </div>
+
+    <!-- Splash Screen -->
+    <div id="splash-screen" class="screen">
+        <div class="splash-container">
+            <img src="Assets/Interface/logos/studiologo.svg" alt="Studio Logo" id="studio-logo" class="splash-logo">
+            <img src="Assets/Interface/logos/gamelogo.svg" alt="Game Logo" id="game-logo" class="splash-logo hidden">
+        </div>
+    </div>
+
+    <!-- Main Menu -->
+    <div id="main-menu" class="screen">
+        <div class="menu-backdrop"></div>
+        <div class="menu-container">
+            <img src="Assets/Interface/logos/gamelogo.svg" alt="Kenzo's Sushi Battlegrounds" class="menu-logo">
+            <div class="menu-buttons">
+                <button class="menu-btn primary" id="btn-start">
+                    <span class="btn-text">START GAME</span>
+                    <span class="btn-shine"></span>
+                </button>
+                <button class="menu-btn secondary" id="btn-options">
+                    <span class="btn-text">OPTIONS</span>
+                    <span class="btn-shine"></span>
+                </button>
+                <button class="menu-btn secondary" id="btn-credits">
+                    <span class="btn-text">CREDITS</span>
+                    <span class="btn-shine"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Character Select -->
+    <div id="character-select" class="screen">
+        <div class="select-backdrop"></div>
+        <div class="select-container">
+            <h1 class="select-title">CHOOSE YOUR FIGHTER</h1>
+            <div class="character-grid" id="character-grid">
+                <!-- Characters will be injected by JS -->
+            </div>
+            <div class="character-preview">
+                <div class="preview-info">
+                    <h2 class="preview-name" id="preview-name">Select a Fighter</h2>
+                    <p class="preview-desc" id="preview-desc">Click on a character to select</p>
+                </div>
+            </div>
+            <div class="vs-display">
+                <div class="vs-player">
+                    <div class="vs-portrait" id="player-portrait"></div>
+                    <span class="vs-label">YOU</span>
+                </div>
+                <div class="vs-text">VS</div>
+                <div class="vs-opponent">
+                    <div class="vs-portrait kenzo-portrait"></div>
+                    <span class="vs-label">KENZO</span>
+                </div>
+            </div>
+            <button class="menu-btn primary fight-btn" id="btn-fight" disabled>
+                <span class="btn-text">FIGHT!</span>
+                <span class="btn-shine"></span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Game Screen -->
+    <div id="game-screen" class="screen">
+        <canvas id="game-canvas"></canvas>
+
+        <!-- HUD -->
+        <div class="game-hud">
+            <div class="hud-player">
+                <div class="hud-avatar" id="hud-player-avatar"></div>
+                <div class="hud-info">
+                    <span class="hud-name" id="hud-player-name">Player</span>
+                    <div class="hud-score">
+                        <span class="score-value" id="player-score">0</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hud-center">
+                <div class="round-display">
+                    <span class="round-label">ROUND</span>
+                    <span class="round-number" id="round-number">1</span>
+                </div>
+                <div class="phase-display" id="phase-display">DRAFT PHASE</div>
+            </div>
+            <div class="hud-opponent">
+                <div class="hud-info">
+                    <span class="hud-name">KENZO</span>
+                    <div class="hud-score">
+                        <span class="score-value" id="kenzo-score">0</span>
+                    </div>
+                </div>
+                <div class="hud-avatar kenzo-avatar"></div>
+            </div>
+        </div>
+
+        <!-- Draft Phase UI -->
+        <div class="draft-ui" id="draft-ui">
+            <h2 class="draft-title">Choose Your Card</h2>
+            <p class="draft-subtitle">Pick <span id="cards-remaining">10</span> more cards</p>
+            <div class="draft-choices" id="draft-choices">
+                <!-- Cards injected by JS -->
+            </div>
+        </div>
+
+        <!-- Player Hand -->
+        <div class="player-hand" id="player-hand">
+            <!-- Cards injected by JS -->
+        </div>
+
+        <!-- Battle UI -->
+        <div class="battle-ui hidden" id="battle-ui">
+            <div class="battle-arena">
+                <div class="battle-slot player-slot" id="player-battle-slot">
+                    <div class="slot-label">Your Cards</div>
+                    <div class="slot-cards" id="player-slot-cards"></div>
+                </div>
+                <div class="battle-vs">VS</div>
+                <div class="battle-slot opponent-slot" id="opponent-battle-slot">
+                    <div class="slot-label">Kenzo's Cards</div>
+                    <div class="slot-cards" id="opponent-slot-cards"></div>
+                </div>
+            </div>
+            <button class="menu-btn primary" id="btn-battle" disabled>
+                <span class="btn-text">BATTLE!</span>
+                <span class="btn-shine"></span>
+            </button>
+        </div>
+
+        <!-- Round Result -->
+        <div class="round-result hidden" id="round-result">
+            <div class="result-text" id="result-text">PLAYER WINS!</div>
+            <div class="result-detail" id="result-detail"></div>
+        </div>
+
+        <!-- Emote Panel -->
+        <div class="emote-panel" id="emote-panel">
+            <button class="emote-toggle" id="emote-toggle">😊</button>
+            <div class="emote-grid hidden" id="emote-grid">
+                <!-- Emotes injected by JS -->
+            </div>
+        </div>
+
+        <!-- Displayed Emote -->
+        <div class="displayed-emote hidden" id="displayed-emote">
+            <img src="" alt="emote" id="emote-image">
+        </div>
+    </div>
+
+    <!-- Victory/Defeat Screen -->
+    <div id="result-screen" class="screen">
+        <div class="result-container">
+            <h1 class="result-title" id="final-result-title">VICTORY!</h1>
+            <p class="result-score" id="final-score">5 - 3</p>
+            <div class="result-buttons">
+                <button class="menu-btn primary" id="btn-rematch">
+                    <span class="btn-text">REMATCH</span>
+                    <span class="btn-shine"></span>
+                </button>
+                <button class="menu-btn secondary" id="btn-menu">
+                    <span class="btn-text">MAIN MENU</span>
+                    <span class="btn-shine"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Options Modal -->
+    <div id="options-modal" class="modal hidden">
+        <div class="modal-content">
+            <h2>OPTIONS</h2>
+            <div class="option-row">
+                <label>Music Volume</label>
+                <input type="range" id="music-volume" min="0" max="100" value="70">
+            </div>
+            <div class="option-row">
+                <label>SFX Volume</label>
+                <input type="range" id="sfx-volume" min="0" max="100" value="80">
+            </div>
+            <div class="option-row">
+                <label>Voice Volume</label>
+                <input type="range" id="voice-volume" min="0" max="100" value="90">
+            </div>
+            <button class="menu-btn secondary" id="btn-close-options">
+                <span class="btn-text">CLOSE</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Credits Modal -->
+    <div id="credits-modal" class="modal hidden">
+        <div class="modal-content">
+            <h2>CREDITS</h2>
+            <div class="credits-text">
+                <p><strong>Kenzo's Sushi Battlegrounds</strong></p>
+                <p>A card battle game set in the world's finest sushi restaurant</p>
+                <br>
+                <p>Created with ❤️ and Babylon.js</p>
+            </div>
+            <button class="menu-btn secondary" id="btn-close-credits">
+                <span class="btn-text">CLOSE</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.babylonjs.com/babylon.js"></script>
+    <script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
+    <script type="module" src="src/main.js"></script>
+</body>
+
+</html>

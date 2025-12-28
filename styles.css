@@ -1,0 +1,968 @@
+/* =====================================================
+   KENZO'S SUSHI BATTLEGROUNDS - STYLES
+   Refined Cartoonish Design
+   ===================================================== */
+
+/* CSS Variables */
+:root {
+    /* Muted Cartoon Palette - Less "Chillón" */
+    --primary-red: #e84118;
+    --primary-red-dark: #c23616;
+    --primary-gold: #fbc531;
+    --primary-gold-dark: #e1b12c;
+
+    --bg-dark: #2f3640;
+    --bg-overlay: rgba(47, 54, 64, 0.85);
+    /* Darker, less harsh overlay */
+
+    --text-color: #2f3640;
+    --text-light: #f5f6fa;
+
+    /* Soft Toon Colors */
+    --toon-blue: #0984e3;
+    --toon-green: #00b894;
+    --toon-orange: #fd9644;
+    --toon-purple: #6c5ce7;
+
+    --font-main: 'Galindo', cursive;
+
+    --transition-bounce: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+    /* Background */
+    --bg-image-url: url('Assets/Images/Background.png');
+}
+
+/* Reset & Base */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    font-family: var(--font-main);
+    color: var(--text-color);
+}
+
+/* Global Blurred Background */
+body::before {
+    content: '';
+    position: fixed;
+    top: -20px;
+    left: -20px;
+    right: -20px;
+    bottom: -20px;
+    background-image: var(--bg-image-url);
+    background-size: cover;
+    background-position: center;
+    filter: blur(12px);
+    /* Increased blur */
+    z-index: -100;
+}
+
+/* Screens Common */
+.screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+.screen.active {
+    display: flex;
+}
+
+/* =====================================================
+   LOADING SCREEN
+   ===================================================== */
+#loading-screen {
+    background: var(--bg-overlay);
+}
+
+.loader-logo img {
+    filter: brightness(0) invert(1) drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
+    width: 200px;
+    animation: pulse 2s infinite ease-in-out;
+}
+
+/* Hide Loading Bar as requested */
+.loader-progress,
+.loader-percentage {
+    display: none;
+}
+
+.loader-text {
+    color: var(--primary-gold);
+    margin-top: 20px;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+/* =====================================================
+   SPLASH SCREEN
+   ===================================================== */
+#splash-screen {
+    background: black;
+    /* Keep splash black for dramatic effect */
+}
+
+/* =====================================================
+   MAIN MENU
+   ===================================================== */
+#main-menu .menu-backdrop {
+    display: none;
+    /* No 3D scene */
+}
+
+.menu-container {
+    background: rgba(47, 54, 64, 0.6);
+    /* Semi-transparent panel */
+    padding: 40px 60px;
+    border-radius: 40px;
+    text-align: center;
+    backdrop-filter: blur(5px);
+    border: 4px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+}
+
+.menu-logo {
+    width: 450px;
+    max-width: 90vw;
+    filter: brightness(0) invert(1) drop-shadow(0 5px 15px rgba(0, 0, 0, 0.5));
+    margin-bottom: 30px;
+}
+
+.menu-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+.menu-btn {
+    font-family: var(--font-main);
+    padding: 16px 20px;
+    font-size: 1.4rem;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    box-shadow: 0 6px 0 rgba(0, 0, 0, 0.2);
+    transition: var(--transition-bounce);
+    position: relative;
+    overflow: hidden;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.menu-btn:active {
+    transform: translateY(4px);
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Colors - Less "Chillón" */
+.menu-btn.primary {
+    background-color: var(--primary-red);
+}
+
+.menu-btn.primary:hover {
+    background-color: #ff6b6b;
+    /* Slightly lighter on hover */
+}
+
+.menu-btn.secondary {
+    background-color: var(--bg-dark);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.menu-btn.secondary:hover {
+    background-color: #3d4653;
+}
+
+/* =====================================================
+   MODALS (Options & Credits) - Fix Z-Index & Layout
+   ===================================================== */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.85);
+    /* Dark overlay */
+    z-index: 1000;
+    /* High z-index to cover everything */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal.hidden {
+    display: none !important;
+}
+
+.modal-content {
+    background: white;
+    padding: 40px;
+    border-radius: 30px;
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    border: 8px solid var(--bg-dark);
+    position: relative;
+    color: var(--text-color);
+}
+
+.modal-content h2 {
+    color: var(--primary-red);
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+}
+
+.option-row {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.option-row label {
+    display: block;
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+    color: var(--bg-dark);
+}
+
+input[type=range] {
+    width: 100%;
+    margin-top: 5px;
+}
+
+/* =====================================================
+   CARDS (Cartoon Style Improved)
+   ===================================================== */
+.game-card {
+    width: 140px;
+    height: 200px;
+    background: white;
+    border: 5px solid #2f3640;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.game-card:hover {
+    transform: translateY(-8px) scale(1.05);
+    z-index: 50;
+    border-color: var(--primary-gold);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.game-card.selected {
+    border-color: var(--primary-red);
+    box-shadow: 0 0 0 4px rgba(232, 65, 24, 0.4);
+    transform: translateY(-10px) scale(1.1);
+}
+
+.card-image {
+    flex: 1;
+    background: radial-gradient(circle, #f5f6fa 20%, #dcdde1 100%);
+    position: relative;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Card Type Badge - Top Right */
+.card-type {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid #2f3640;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    z-index: 5;
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* Card Tier Badge - Top Left */
+.card-tier {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    background: #2f3640;
+    color: white;
+    font-size: 0.6rem;
+    padding: 2px 6px;
+    border-radius: 8px;
+    border: 1px solid white;
+    text-transform: uppercase;
+    z-index: 5;
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
+}
+
+.card-tier.common {
+    background: #7f8fa6;
+}
+
+.card-tier.rare {
+    background: var(--toon-blue);
+}
+
+.card-tier.legendary {
+    background: var(--primary-gold);
+    color: #2f3640;
+}
+
+.card-name {
+    background: var(--primary-red);
+    color: white;
+    font-size: 0.85rem;
+    padding: 6px 4px;
+    text-align: center;
+    border-top: 3px solid #2f3640;
+    border-bottom: 3px solid #2f3640;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
+}
+
+.card-stats {
+    display: flex;
+    justify-content: space-around;
+    padding: 6px;
+    background: #f1f2f6;
+    font-weight: bold;
+}
+
+.card-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 1;
+}
+
+.stat-icon {
+    font-size: 0.8rem;
+    margin-bottom: 2px;
+}
+
+.stat-value {
+    font-size: 1rem;
+    color: #2f3640;
+}
+
+.stat-attack .stat-value {
+    color: var(--primary-red);
+}
+
+.stat-defense .stat-value {
+    color: var(--toon-blue);
+}
+
+.stat-healing .stat-value {
+    color: var(--toon-green);
+}
+
+/* =====================================================
+   CHARACTER SELECT - Improved Grid & Design
+   ===================================================== */
+#character-select .select-container {
+    width: 100%;
+    height: 100vh;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    /* Align top */
+    align-items: center;
+    position: relative;
+}
+
+.select-title {
+    font-size: 2.5rem;
+    color: white;
+    text-shadow: 3px 3px 0 var(--bg-dark);
+    margin: 20px 0;
+    text-align: center;
+}
+
+/* Grid Container - Scrollable area for characters */
+.character-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    max-width: 1200px;
+    width: 100%;
+    overflow-y: auto;
+    /* Allow scrolling if too many */
+    padding: 20px;
+    max-height: 50vh;
+    /* Limit height to show VS box below */
+
+    /* Scrollbar styling */
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-gold) rgba(255, 255, 255, 0.1);
+}
+
+.character-card {
+    background: white;
+    border: 4px solid var(--bg-dark);
+    border-radius: 15px;
+    width: 140px;
+    height: 190px;
+    cursor: pointer;
+    transition: var(--transition-bounce);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.character-card:hover {
+    transform: translateY(-5px);
+}
+
+.character-card.selected {
+    border-color: var(--primary-red);
+    background: #ffcccc;
+    transform: scale(1.05);
+    box-shadow: 0 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+.character-card .char-image {
+    flex: 1;
+    background: #f1f2f6;
+    display: flex;
+    /* Center alignment potentially */
+}
+
+/* Fix for 3D canvas inside cards */
+.character-card canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.character-card .char-name {
+    background: var(--bg-dark);
+    color: white;
+    text-align: center;
+    padding: 8px 4px;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}
+
+/* VS Display - Fixed at bottom area */
+.vs-display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    background: white;
+    padding: 15px 40px;
+    border-radius: 50px;
+    /* Pill shape */
+    border: 5px solid var(--bg-dark);
+    margin: 20px 0;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.vs-player,
+.vs-opponent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.vs-portrait {
+    width: 80px;
+    height: 80px;
+    background: #f1f2f6;
+    border: 3px solid var(--bg-dark);
+    border-radius: 50%;
+    margin-bottom: 5px;
+    overflow: hidden;
+}
+
+/* Fix for portrait canvas */
+.vs-portrait canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.vs-text {
+    font-size: 2.5rem;
+    color: var(--primary-red);
+    text-shadow: 2px 2px 0 var(--bg-dark);
+}
+
+#btn-fight {
+    font-size: 2rem;
+    padding: 10px 50px;
+    margin-top: 10px;
+}
+
+/* Preview text hidden to save space, redundant with cards */
+.character-preview {
+    display: none;
+}
+
+/* =====================================================
+   GAME SCREEN - Render & Grid Fixes
+   ===================================================== */
+#game-screen {
+    /* Base state: Hidden like other screens */
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+#game-screen.active {
+    /* When active, show as block (not flex) to respect absolute children */
+    display: block;
+}
+
+/* Canvas is fixed in specific position or full screen */
+#game-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    /* Lowest level */
+    pointer-events: none;
+    /* Let clicks pass to UI usually, unless we need 3D picking (not for now) */
+    /* Check battle.js: If camera control is false, we don't need pointer events on canvas */
+}
+
+/* HUD Layer */
+.game-hud {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    z-index: 20;
+    pointer-events: none;
+    /* Layout layer shouldn't block */
+}
+
+.hud-player,
+.hud-opponent {
+    pointer-events: auto;
+    /* Avatars can be clicked? */
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: white;
+    padding: 10px 20px;
+    border-radius: 50px;
+    border: 4px solid var(--bg-dark);
+    box-shadow: 0 5px 0 rgba(0, 0, 0, 0.2);
+}
+
+.hud-name {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--bg-dark);
+}
+
+.score-value {
+    color: var(--primary-red);
+    font-size: 1.5rem;
+}
+
+.hud-avatar {
+    width: 50px;
+    height: 50px;
+    background: #ddd;
+    border-radius: 50%;
+    border: 2px solid var(--bg-dark);
+}
+
+/* =====================================================
+   BATTLE UI GRID FIXES
+   ===================================================== */
+.battle-ui {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    pointer-events: none;
+    padding-bottom: 180px;
+    /* Space for the hand */
+}
+
+/* The slots */
+.battle-arena {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 40px;
+    margin-bottom: 20px;
+    pointer-events: auto;
+}
+
+.battle-slot {
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(8px);
+    border: 4px dashed rgba(255, 255, 255, 0.6);
+    border-radius: 25px;
+    padding: 15px;
+    min-width: 280px;
+    /* Wider to fit cards */
+    min-height: 220px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.battle-slot .slot-label {
+    position: absolute;
+    top: -30px;
+    font-size: 1.2rem;
+    color: white;
+    text-shadow: 2px 2px 0 var(--bg-dark);
+    background: var(--bg-dark);
+    padding: 2px 15px;
+    border-radius: 20px;
+}
+
+.slot-cards {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+/* Battle Button Floating in Center */
+#btn-battle {
+    position: absolute;
+    bottom: 220px;
+    /* Between slots and hand */
+    z-index: 100;
+    pointer-events: auto;
+    font-size: 1.5rem;
+    padding: 12px 40px;
+    box-shadow: 0 8px 0 #c23616, 0 15px 20px rgba(0, 0, 0, 0.4);
+    animation: bounceBtn 2s infinite;
+}
+
+@keyframes bounceBtn {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+/* Player Hand - Fixed at Bottom */
+.player-hand {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 180px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding-bottom: 20px;
+    z-index: 60;
+    pointer-events: none;
+    /* Let clicks pass */
+}
+
+.player-hand .game-card {
+    width: 110px;
+    height: 150px;
+    margin: 0 -15px;
+    box-shadow: -4px 0 10px rgba(0, 0, 0, 0.3);
+    pointer-events: auto;
+    /* Cards clickable */
+    transform-origin: bottom center;
+}
+
+.player-hand .game-card:hover {
+    margin: 0 5px;
+    transform: translateY(-50px) scale(1.25) rotate(0deg) !important;
+    z-index: 100;
+}
+
+/* Draft Phase Grid Fix */
+.draft-ui {
+    width: 100%;
+    max-width: 1200px;
+}
+
+/* =====================================================
+   CARDS (Cartoon Style Improved)
+   ===================================================== */
+.game-card {
+    width: 140px;
+    height: 200px;
+    background: white;
+    border: 5px solid #2f3640;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.game-card:hover {
+    transform: translateY(-8px) scale(1.05);
+    z-index: 50;
+    border-color: var(--primary-gold);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.game-card.selected {
+    border-color: var(--primary-red);
+    box-shadow: 0 0 0 4px rgba(232, 65, 24, 0.4);
+    transform: translateY(-10px) scale(1.1);
+}
+
+.card-image {
+    flex: 1;
+    background: radial-gradient(circle, #f5f6fa 20%, #dcdde1 100%);
+    position: relative;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Card Type Badge - Top Right */
+.card-type {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid #2f3640;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    z-index: 5;
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+}
+
+.card-type.attack {
+    color: var(--primary-red);
+    border-color: var(--primary-red);
+}
+
+.card-type.defense {
+    color: var(--toon-blue);
+    border-color: var(--toon-blue);
+}
+
+.card-type.healing {
+    color: var(--toon-green);
+    border-color: var(--toon-green);
+}
+
+/* Card Tier Badge - Top Left */
+.card-tier {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    background: #2f3640;
+    color: white;
+    font-size: 0.6rem;
+    padding: 2px 6px;
+    border-radius: 8px;
+    border: 1px solid white;
+    text-transform: uppercase;
+    z-index: 5;
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
+}
+
+.card-tier.common {
+    background: #7f8fa6;
+}
+
+.card-tier.rare {
+    background: var(--toon-blue);
+}
+
+.card-tier.legendary {
+    background: var(--primary-gold);
+    color: #2f3640;
+}
+
+.card-name {
+    background: var(--primary-red);
+    color: white;
+    font-size: 0.85rem;
+    padding: 6px 4px;
+    text-align: center;
+    border-top: 3px solid #2f3640;
+    border-bottom: 3px solid #2f3640;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
+}
+
+.card-stats {
+    display: flex;
+    justify-content: space-around;
+    padding: 6px;
+    background: #f1f2f6;
+    font-weight: bold;
+}
+
+.card-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 1;
+}
+
+.stat-icon {
+    font-size: 0.8rem;
+    margin-bottom: 2px;
+}
+
+.stat-value {
+    font-size: 1rem;
+    color: #2f3640;
+}
+
+.stat-attack .stat-value {
+    color: var(--primary-red);
+}
+
+.stat-defense .stat-value {
+    color: var(--toon-blue);
+}
+
+.stat-healing .stat-value {
+    color: var(--toon-green);
+}
+
+/* Result Screen */
+#result-screen {
+    background: rgba(0, 0, 0, 0.85);
+}
+
+.result-container {
+    background: white;
+    padding: 50px;
+    border-radius: 40px;
+    border: 10px solid var(--bg-dark);
+    text-align: center;
+    animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.result-title {
+    font-size: 4rem;
+    color: var(--primary-red);
+    text-shadow: 3px 3px 0 var(--bg-dark);
+    margin-bottom: 20px;
+}
+
+.result-score {
+    font-size: 3rem;
+    color: var(--bg-dark);
+    margin-bottom: 30px;
+}
+
+@keyframes popIn {
+    0% {
+        transform: scale(0);
+    }
+
+    80% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Animations */
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-5px);
+    }
+
+    75% {
+        transform: translateX(5px);
+    }
+}
+
+/* Hide Utility */
+.hidden {
+    display: none !important;
+}
